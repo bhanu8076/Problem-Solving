@@ -1,0 +1,10 @@
+# Problem-Solving
+Leet Code Problem solving Questions:
+1. https://leetcode.com/problems/median-of-two-sorted-arrays/
+2. https://leetcode.com/problems/roman-to-integer/
+3. https://leetcode.com/problems/merge-k-sorted-lists/
+4. https://leetcode.com/problems/reverse-nodes-in-k-group/
+5. https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
+6. https://leetcode.com/problems/longest-valid-parentheses/
+7. https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+8. https://leetcode.com/problems/group-anagrams/
