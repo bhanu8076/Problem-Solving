@@ -11,3 +11,4 @@ Leet Code Problem solving Questions:
 9. https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/
 10. https://leetcode.com/problems/longest-common-prefix
 11. https://leetcode.com/problems/bulls-and-cows/
+12. https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
