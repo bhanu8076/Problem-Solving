@@ -12,3 +12,4 @@ Leet Code Problem solving Questions:
 10. https://leetcode.com/problems/longest-common-prefix
 11. https://leetcode.com/problems/bulls-and-cows/
 12. https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
+13. https://leetcode.com/problems/multiply-strings/
