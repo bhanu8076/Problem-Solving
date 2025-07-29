@@ -123,10 +123,8 @@ console.log(listAllSubstrings("abc"));
 // Output: ['a', 'ab', 'abc', 'b', 'bc', 'c']
 
 function isRotation(str1, str2) {
-  // Strings must be of equal length and not empty
   if (str1.length !== str2.length || str1.length === 0) return false;
 
-  // Concatenate str1 with itself, then check if str2 is a substring
   return (str1 + str1).includes(str2);
 }
 

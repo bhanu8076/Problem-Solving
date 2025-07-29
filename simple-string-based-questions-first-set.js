@@ -46,20 +46,18 @@ console.log(removeDuplicates("banana")); // "ban"
 function firstNonRepeatingChar(str) {
   let countMap = {};
 
-  // First pass: count characters
   for (let i = 0; i < str.length; i++) {
     let char = str[i];
     countMap[char] = (countMap[char] || 0) + 1;
   }
 
-  // Second pass: find first unique
   for (let i = 0; i < str.length; i++) {
     if (countMap[str[i]] === 1) {
       return str[i];
     }
   }
 
-  return null; // No non-repeating character
+  return null;
 }
 
 console.log(firstNonRepeatingChar("swiss")); // "w"
