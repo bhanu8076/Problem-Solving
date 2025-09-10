@@ -84,3 +84,59 @@ function maxSubarraySum(arr) {
 
 // Example usage:
 console.log(maxSubarraySum([-2,1,-3,4,-1,2,1,-5,4])); // Output: 6 (subarray [4,-1,2,1])
+
+// Check if array is sorted and rotated.
+
+function isSortedAndRotated(arr) {
+    let n = arr.length;
+    let count = 0;
+
+    // Count how many times arr[i] > arr[i+1]
+    for (let i = 0; i < n; i++) {
+        let j = (i + 1) % n;
+        if (arr[i] > arr[j]) {
+            count++;
+        }
+    }
+
+    // If exactly one such point → it's sorted and rotated
+    return count === 1;
+}
+
+console.log(isSortedAndRotated([3, 4, 5, 1, 2])); // true
+console.log(isSortedAndRotated([1, 2, 3, 4, 5])); // true (sorted, but considered rotated 0 times)
+console.log(isSortedAndRotated([2, 1, 3, 4]));   // false
+console.log(isSortedAndRotated([7, 9, 11, 12, 5])); // true
+console.log(isSortedAndRotated([1, 3, 2])); // false
+
+
+function rearrangeMaxMin(arr) {
+    // Step 1: Sort the array
+    arr.sort((a, b) => a - b);
+
+    let result = [];
+    let start = 0, end = arr.length - 1;
+
+    // Step 2: Alternate picking max and min
+    while (start <= end) {
+        if (start !== end) {
+            result.push(arr[end--]); // max
+            result.push(arr[start++]); // min
+        } else {
+            result.push(arr[start]); // middle element if odd length
+            break;
+        }
+    }
+
+    return result;
+}
+
+// ----------------- Testing -----------------
+console.log(rearrangeMaxMin([1, 2, 3, 4, 5, 6, 7])); 
+// [7, 1, 6, 2, 5, 3, 4]
+
+console.log(rearrangeMaxMin([10, 20, 30, 40, 50]));
+// [50, 10, 40, 20, 30]
+
+console.log(rearrangeMaxMin([5, 10, 15, 20]));
+// [20, 5, 15, 10]
