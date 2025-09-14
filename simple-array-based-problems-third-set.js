@@ -140,3 +140,59 @@ console.log(rearrangeMaxMin([10, 20, 30, 40, 50]));
 
 console.log(rearrangeMaxMin([5, 10, 15, 20]));
 // [20, 5, 15, 10]
+
+
+// Function to find leaders in an array
+function findLeaders(arr) {
+    const n = arr.length;
+    let leaders = [];
+    let maxFromRight = arr[n - 1];
+    leaders.push(maxFromRight); // Last element is always a leader
+
+    // Traverse from right to left
+    for (let i = n - 2; i >= 0; i--) {
+        if (arr[i] > maxFromRight) {
+            maxFromRight = arr[i];
+            leaders.push(arr[i]);
+        }
+    }
+
+    // Leaders are collected in reverse order, so reverse before returning
+    return leaders.reverse();
+}
+
+// ----------- Test Cases -----------
+console.log(findLeaders([16, 17, 4, 3, 5, 2])); // [17, 5, 2]
+console.log(findLeaders([1, 2, 3, 4, 0]));      // [4, 0]
+console.log(findLeaders([7, 10, 4, 10, 6, 5, 2])); // [10, 10, 6, 5, 2]
+console.log(findLeaders([5, 4, 3, 2, 1]));      // [5, 4, 3, 2, 1]
+
+// Product of all elements except self
+// Approach: Use prefix and suffix products to avoid division and handle zeros
+
+function productExceptSelf(arr) {
+    const n = arr.length;
+    const output = new Array(n).fill(1);
+
+    // Calculate prefix products
+    let prefix = 1;
+    for (let i = 0; i < n; i++) {
+        output[i] = prefix;
+        prefix *= arr[i];
+    }
+
+    // Calculate suffix products and multiply with prefix products
+    let suffix = 1;
+    for (let i = n - 1; i >= 0; i--) {
+        output[i] *= suffix;
+        suffix *= arr[i];
+    }
+
+    return output;
+}
+
+// ----------- Test Cases -----------
+console.log(productExceptSelf([1, 2, 3, 4]));      // [24, 12, 8, 6]
+console.log(productExceptSelf([2, 3, 4, 5]));      // [60, 40, 30, 24]
+console.log(productExceptSelf([0, 1, 2, 3]));      // [6, 0, 0, 0]
+console.log(productExceptSelf([5, 0, 2]));         // [0, 10, 0]
