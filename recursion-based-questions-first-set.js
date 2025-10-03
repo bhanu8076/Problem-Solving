@@ -117,3 +117,66 @@ console.log(generateParenthesis(2));
 
 console.log(generateParenthesis(3));
 // ["((()))", "(()())", "(())()", "()(())", "()()()"]
+
+function findAllPaths(maze) {
+  const n = maze.length;
+  const m = maze[0].length;
+  const result = [];
+
+  function backtrack(x, y, path) {
+    // If out of bounds or blocked cell, stop
+    if (x < 0 || y < 0 || x >= n || y >= m || maze[x][y] === 0) {
+      return;
+    }
+
+    // If destination is reached
+    if (x === n - 1 && y === m - 1) {
+      result.push([...path]); // store a copy of the path
+      return;
+    }
+
+    // Mark cell as visited
+    maze[x][y] = 0;
+
+    // Move Down
+    path.push("Down");
+    backtrack(x + 1, y, path);
+    path.pop();
+
+    // Move Right
+    path.push("Right");
+    backtrack(x, y + 1, path);
+    path.pop();
+
+    // (Optional) If Up/Left moves are allowed, add them here
+
+    // Unmark cell (backtrack)
+    maze[x][y] = 1;
+  }
+
+  // Start from (0,0) if it's open
+  if (maze[0][0] === 1) {
+    backtrack(0, 0, []);
+  }
+
+  return result;
+} 
+
+console.log(findAllPaths([
+  [1, 0],
+  [1, 1]
+]));
+// [["Down", "Right"]]
+
+console.log(findAllPaths([
+  [1, 1, 1],
+  [1, 0, 1],
+  [0, 1, 1]
+]));
+// [["Right", "Right", "Down", "Down"], ["Down", "Right", "Right", "Down"]]
+
+console.log(findAllPaths([
+  [1, 0],
+  [0, 1]
+]));
+// []
