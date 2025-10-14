@@ -180,3 +180,89 @@ console.log(findAllPaths([
   [0, 1]
 ]));
 // []
+
+function flattenArray(arr) {
+  let result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const element = arr[i];
+
+    if (Array.isArray(element)) {
+      // Recursive call for nested array
+      const flat = flattenArray(element);
+      result = result.concat(flat); // merge flattened subarray
+    } else {
+      result.push(element);
+    }
+  }
+
+  return result;
+}
+
+console.log(flattenArray([1, [2, 3], [4, [5, 6]]]));
+// [1, 2, 3, 4, 5, 6]
+
+console.log(flattenArray([[1], [2, [3, [4]]]]));
+// [1, 2, 3, 4]
+
+console.log(flattenArray([1, 2, 3]));
+// [1, 2, 3]
+
+console.log(flattenArray([[[[1]]], 2, [3, [4, [5]]]]));
+// [1, 2, 3, 4, 5]
+
+
+function findValuePath(obj, target) {
+  for (const key in obj) {
+    const value = obj[key];
+
+    // Base case: found the target value
+    if (value === target) {
+      return [key];
+    }
+
+    // Recursive case: if value is an object, search inside it
+    if (typeof value === "object" && value !== null) {
+      const path = findValuePath(value, target);
+      if (path) {
+        return [key, ...path];
+      }
+    }
+  }
+
+  // Value not found in this branch
+  return null;
+}
+
+const data1 = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: 5
+    }
+  }
+};
+console.log(findValuePath(data1, 5));
+// ["b", "d", "e"]
+
+const data2 = {
+  user: {
+    info: {
+      name: "Bhanu",
+      address: {
+        city: "Hyderabad"
+      }
+    }
+  }
+};
+console.log(findValuePath(data2, "Hyderabad"));
+// ["user", "info", "address", "city"]
+
+const data3 = {
+  x: 1,
+  y: 2,
+  z: { a: 3 }
+};
+console.log(findValuePath(data3, 99));
+// null
