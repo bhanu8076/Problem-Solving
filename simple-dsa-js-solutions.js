@@ -155,3 +155,19 @@ k = k % n;
 reverse(nums, 0, n - 1);
 reverse(nums, 0, n - k - 1);
 reverse(nums, n - k, n - 1);
+
+// reverse an array with recursion
+
+function reverseArray(arr, left = 0, right = arr.length - 1) {
+  if (left >= right) return arr;
+
+  // Swap elements
+  [arr[left], arr[right]] = [arr[right], arr[left]];
+
+  // Recursive call
+  return reverseArray(arr, left + 1, right - 1);
+}
+
+const nums = [1, 2, 3, 4, 5];
+console.log(reverseArray(nums));
+// [5, 4, 3, 2, 1]
