@@ -288,3 +288,42 @@ function flattenArray(arr, depth = 1) {
   flatten(arr, depth);
   return result;
 }
+
+
+// searching in a rotated sorted array using recursion
+function search(nums, target) {
+
+  function binarySearch(left, right) {
+
+    // Base case: not found
+    if (left > right) return -1;
+
+    const mid = Math.floor((left + right) / 2);
+
+    // Found target
+    if (nums[mid] === target) return mid;
+
+    // Check if left half is sorted
+    if (nums[left] <= nums[mid]) {
+
+      // Target lies in sorted left half
+      if (nums[left] <= target && target < nums[mid]) {
+        return binarySearch(left, mid - 1);
+      } else {
+        return binarySearch(mid + 1, right);
+      }
+
+    } else {
+      // Right half is sorted
+
+      // Target lies in sorted right half
+      if (nums[mid] < target && target <= nums[right]) {
+        return binarySearch(mid + 1, right);
+      } else {
+        return binarySearch(left, mid - 1);
+      }
+    }
+  }
+
+  return binarySearch(0, nums.length - 1);
+}
