@@ -266,3 +266,25 @@ const data3 = {
 };
 console.log(findValuePath(data3, 99));
 // null
+
+// flatten an array upto n depth
+function flattenArray(arr, depth = 1) {
+  const result = [];
+
+  function flatten(currentArr, currentDepth) {
+    for (let i = 0; i < currentArr.length; i++) {
+      if (!(i in currentArr)) continue; // skip sparse holes
+
+      const value = currentArr[i];
+
+      if (Array.isArray(value) && currentDepth > 0) {
+        flatten(value, currentDepth - 1);
+      } else {
+        result.push(value);
+      }
+    }
+  }
+
+  flatten(arr, depth);
+  return result;
+}
