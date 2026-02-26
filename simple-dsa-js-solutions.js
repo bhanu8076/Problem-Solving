@@ -73,3 +73,54 @@ const mergeSorted = (a, b) => {
 };
 
 console.log(mergeSorted([1,3,5], [2,4,6]));
+
+// kth largest using quickselect
+
+function findKthLargest(nums, k) {
+  // kth largest = (n - k)th smallest in sorted order
+  const targetIndex = nums.length - k;
+
+  // Quickselect function
+  function quickSelect(left, right) {
+
+    // Choose a pivot (here we pick the rightmost element)
+    const pivot = nums[right];
+
+    // Partition the array:
+    //    All numbers < pivot go to left side
+    //    All numbers >= pivot go to right side
+    let partitionIndex = left;
+
+    for (let i = left; i < right; i++) {
+      if (nums[i] < pivot) {
+        // Swap nums[i] with nums[partitionIndex]
+        [nums[i], nums[partitionIndex]] =
+          [nums[partitionIndex], nums[i]];
+
+        partitionIndex++;
+      }
+    }
+
+    // Place pivot in its correct sorted position
+    [nums[partitionIndex], nums[right]] =
+      [nums[right], nums[partitionIndex]];
+
+    // Now check:
+    // If pivot index == target index → we found kth largest
+    if (partitionIndex === targetIndex) {
+      return nums[partitionIndex];
+    }
+
+    // If pivot index < target → search right half
+    else if (partitionIndex < targetIndex) {
+      return quickSelect(partitionIndex + 1, right);
+    }
+
+    // If pivot index > target → search left half
+    else {
+      return quickSelect(left, partitionIndex - 1);
+    }
+  }
+
+  return quickSelect(0, nums.length - 1);
+}
