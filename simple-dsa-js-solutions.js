@@ -124,3 +124,34 @@ function findKthLargest(nums, k) {
 
   return quickSelect(0, nums.length - 1);
 }
+
+// rotate an array by k position
+function rotate(nums, k) {
+  const n = nums.length;
+  k = k % n; // handle k > n
+
+  function reverse(arr, left, right) {
+    while (left < right) {
+      [arr[left], arr[right]] = [arr[right], arr[left]];
+      left++;
+      right--;
+    }
+  }
+
+  // Step 1: reverse whole array
+  reverse(nums, 0, n - 1);
+
+  // Step 2: reverse first k elements
+  reverse(nums, 0, k - 1);
+
+  // Step 3: reverse remaining
+  reverse(nums, k, n - 1);
+
+  return nums;
+}
+
+// left rotation
+k = k % n;
+reverse(nums, 0, n - 1);
+reverse(nums, 0, n - k - 1);
+reverse(nums, n - k, n - 1);
